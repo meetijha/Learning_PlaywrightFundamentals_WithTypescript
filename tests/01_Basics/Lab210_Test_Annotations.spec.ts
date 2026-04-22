@@ -20,7 +20,13 @@ test.fail('expected to fail', async ({ page }) => {
 });
 
 // Slow test (3x timeout)
-test.slow('slow test', async ({ page }) => {
+// Below gives error becuase of the way test.slow() is used. 
+// It should be called inside the test function, not as a parameter to the test function. 
+//     // Has extended timeout
+// });
+
+test('slow test', async ({ page }) => {
+    test.slow();
     // Has extended timeout
 });
 
