@@ -15,7 +15,7 @@ test("Invalid Login validation", async ({ page }) => {
     await page.getByRole("textbox", { name: "Password" }).fill("pass123");
 
     // With only {name: 'Sign in'} 4 elements are getting matched, so we need to use exact: true to match the exact element with name: Sign in
-    // Can see all 4 element xpath in report generated after test execution
+    // Can see all 4 element description in report generated after test execution
     
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
