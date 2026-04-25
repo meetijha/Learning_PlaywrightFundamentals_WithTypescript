@@ -10,7 +10,7 @@ test("Invalid Login validation", async ({ page }) => {
     // </div>
     // </li>
 
-    // 'Email address' is comming from label, which is associated as sibling of input field.
+    // 'Email address' is coming from label, which is associated as sibling of div of input field.
     await page.getByRole("textbox", { name: "Email address" }).fill("admin");
     await page.getByRole("textbox", { name: "Password" }).fill("pass123");
 
