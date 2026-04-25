@@ -15,3 +15,5 @@ async function multiTabTest() {
     await page2.goto("https://app.vwo.com/#login");
     console.log("Tab 2 Title:", await page2.title());
 }
+
+multiTabTest();
