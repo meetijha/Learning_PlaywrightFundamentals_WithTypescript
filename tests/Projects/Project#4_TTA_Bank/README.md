@@ -1,4 +1,4 @@
-```markdown
+
 # Project #4 - TTA Bank Money Withdraw
 
 > Playwright test for validating bank withdrawal behavior, built as part of the Playwright Fundamentals with TypeScript course.

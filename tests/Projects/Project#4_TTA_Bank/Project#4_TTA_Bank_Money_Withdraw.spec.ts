@@ -51,5 +51,5 @@ test('Check If Balance is refelcted after withdraw',async ({page})=>{
   function textBalanceToNumberConverter(balance :String) :number
     {
         return parseFloat(balance.replace(/[$,]/g, "")); // /g here means all occurance of $ and , will be replaced with "" not just first
-        
+        // return parseFloat(balance.replaceAll("$", "").replaceAll(",", "")); // This also can be used instead
     }
