@@ -1,4 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
+import path from 'path';
 
 const BASE_URL ="https://app.thetestingacademy.com/playwright/tables/practice";
 const uploadFilePath= "tests/Projects/Project#5 - QA Profile Form/sample-upload.txt";
@@ -12,30 +13,47 @@ interface personalInformation
     yearsOfExperience: number;
     date: Date;
     profession: string;
-     automationTools: string[]
+    automationTools: string[]
     continentsWorkedFrom: string[]
    
 }
 
 async function fillPersonalInformation(page: Page, personalInfo: personalInformation) :Promise<void>
 {
+   // Fill Personal Information
    await page.getByRole('textbox', {name:'First name'}).fill(personalInfo.firstName);
    await page.getByRole('textbox',{name: 'Last name'}).fill(personalInfo.lastName);
-   await page.getByRole('radio',({name :` ${personalInfo.gender}`})).click();
+   await page.getByRole('radio',({name : personalInfo.gender})).click();
 
+   await expect(page.getByRole('textbox', { name: 'First name' })).toHaveValue(personalInfo.firstName);
+   await expect(page.getByRole('textbox', { name: 'Last name' })).toHaveValue(personalInfo.lastName);
+   await expect(page.getByRole('radio', { name: personalInfo.gender })).toBeChecked();
+   
+   // Fill Professional Details
    await page.selectOption('#years-experience',`${personalInfo.yearsOfExperience}`);
-   const formattedDate = personalInfo.date.toISOString().split('T')[0];
-   await page.locator('#profile-date').fill(formattedDate);
-   await await page.getByLabel(`${personalInfo.profession}`).click();
+   await expect(page.locator('#years-experience')).toHaveValue(String(personalInfo.yearsOfExperience));
 
+   //Fill Date
+   const formattedDate = personalInfo.date.toISOString().split('T')[0];
+   // toISOString() -> converts to 2026-11-10T00:00:00.000Z
+   // .split('T')[0]; -> gives 2026-11-10
+   await page.locator('#profile-date').fill(formattedDate);
+   await expect(page.locator('#profile-date')).toHaveValue(formattedDate);
+   
+   await await page.getByLabel(personalInfo.profession).click();
+   await expect(page.getByLabel(personalInfo.profession)).toBeChecked();
+
+   // Update technical skills
    for(const tool of personalInfo.automationTools)
    {
         await page.getByRole('checkbox', {name : tool}).check();
+        await expect(page.getByRole('checkbox', {name : tool})).toBeChecked();
    }
 
    for(const continent of personalInfo.continentsWorkedFrom)
    {
     await page.getByRole('checkbox',{name : continent}).check();
+    await expect(page.getByRole('checkbox',{name : continent})).toBeChecked();
    }
 }
 
@@ -45,11 +63,14 @@ async function verifyTabSwitch(page: Page)
   expect (page.locator('#selenium-tab-panel')).toContainText("Navigation commands");
 }
 
-async function uploadFile(page: Page, uploadFilePath: string, downloadfilePath: string)
+async function fileOperations(page: Page, uploadFilePath: string, downloadfilePath: string)
 {
   
     //Upload File
   await page.locator('#upload-image').setInputFiles(uploadFilePath);
+  //extracting filename
+  const fileName = path.basename(uploadFilePath);
+  await expect(page.locator('#upload-file-name')).toContainText(fileName);
   
     //Download File Flow
   const downloadPromise = page.waitForEvent('download');
@@ -82,7 +103,7 @@ test ('Verify form is filled and submitted Successfully',async({page})=>{
     }
     await fillPersonalInformation(page,personalInfo);
     await verifyTabSwitch(page);
-    await uploadFile(page, uploadFilePath,downloadFilePath);
+    await fileOperations(page, uploadFilePath,downloadFilePath);
 
 
     await saveProfile(page);
