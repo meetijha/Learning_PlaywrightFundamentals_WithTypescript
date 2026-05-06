@@ -57,13 +57,13 @@ async function fillPersonalInformation(page: Page, personalInfo: personalInforma
    }
 }
 
-async function verifyTabSwitch(page: Page)
+async function verifyTabSwitch(page: Page) :Promise<void>
 {
   await page.getByRole('tab', {name: 'Navigation Commands'}).click();
   expect (page.locator('#selenium-tab-panel')).toContainText("Navigation commands");
 }
 
-async function fileOperations(page: Page, uploadFilePath: string, downloadfilePath: string)
+async function fileOperations(page: Page, uploadFilePath: string, downloadfilePath: string) :Promise<void>
 {
   
     //Upload File
@@ -81,12 +81,12 @@ async function fileOperations(page: Page, uploadFilePath: string, downloadfilePa
 
 }
 
-async function saveProfile(page:Page)
+async function saveProfile(page:Page) :Promise<void>
 {
     await page.getByRole('button', { name: 'Save profile' }).click();
 }
 
-async function  verifySubmittedData(page: Page, personalInfo : personalInformation)
+async function  verifySubmittedData(page: Page, personalInfo : personalInformation) :Promise<void>
 {
 
 const outputText= await page.locator('.submission-output').textContent();
@@ -100,8 +100,8 @@ const formattedDate = personalInfo.date.toISOString().split('T')[0];
   yearsExperience: String(personalInfo.yearsOfExperience),
   date: formattedDate,
   profession: personalInfo.profession,
-  tools: personalInfo.automationTools,
-  //continents: personalInfo.continentsWorkedFrom,
+  tools: personalInfo.automationTools, // Array data provided in correct order so works
+  //continents: personalInfo.continentsWorkedFrom,// Array data provided in random order
   upload: {} // This is a bug, as filename is not mentioned
 });
 
