@@ -86,7 +86,35 @@ async function saveProfile(page:Page)
     await page.getByRole('button', { name: 'Save profile' }).click();
 }
 
-test ('Verify form is filled and submitted Successfully',async({page})=>{
+async function  verifySubmittedData(page: Page, personalInfo : personalInformation)
+{
+
+const outputText= await page.locator('.submission-output').textContent();
+const outputJson = JSON.parse(outputText || '{}');
+const formattedDate = personalInfo.date.toISOString().split('T')[0];
+
+  expect(outputJson).toMatchObject({
+  firstName: personalInfo.firstName,
+  lastName: personalInfo.lastName,
+  gender: personalInfo.gender,
+  yearsExperience: String(personalInfo.yearsOfExperience),
+  date: formattedDate,
+  profession: personalInfo.profession,
+  tools: personalInfo.automationTools,
+  //continents: personalInfo.continentsWorkedFrom,
+  upload: {} // This is a bug, as filename is not mentioned
+});
+
+//continents checked seprately because in data I provided Europe before Asia
+
+// Order Matters
+// expect(outputJson.continents).toEqual(personalInfo.continentsWorkedFrom);// will give error as output will be Asia, Europe
+
+// Order doesnt matter
+expect(outputJson.continents).toEqual(expect.arrayContaining(personalInfo.continentsWorkedFrom)); // If we want order shouldnt matter
+}
+
+test ('Verify if form is filled and submitted Successfully',async({page})=>{
 
     
     await page.goto(BASE_URL);
@@ -107,4 +135,6 @@ test ('Verify form is filled and submitted Successfully',async({page})=>{
 
 
     await saveProfile(page);
+
+    await verifySubmittedData(page,personalInfo);
 });
