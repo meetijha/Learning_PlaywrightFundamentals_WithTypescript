@@ -5,7 +5,7 @@ async function run() {
     let browser:Browser= await chromium.launch({headless: false});
     console.log("Browser launched");
 
-    // LEVEL 2: Create browser context - incognito window, fresh session, isolated cookies, do it for each test}
+    // LEVEL 2: Create browser context - incognito window, fresh session, isolated cookies, do it for each test
     let context: BrowserContext= await browser.newContext();
     console.log("Browser context created", context);
 
@@ -22,4 +22,4 @@ async function run() {
     await browser.close();  
 }
 
-run();
+await run();
