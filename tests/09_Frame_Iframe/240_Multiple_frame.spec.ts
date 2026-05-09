@@ -17,7 +17,7 @@ test('Multiple iframe test', async ({ page }) => {
     console.log("Frame names in the page: ", frames.map(frame => frame.name())); // [ '', 'main', 'frame1', 'frame2' ]
 
     // another way to get total number of frames in the page
-    let allFrames : Locator[]= await page.locator('//frame').all();// it will return array of frames in the page. it will not include main frame.
+    let allFrames : Locator[]= await page.locator('//frame').all();// it will return array of frames in the page. it will not include frameset in the page.
     console.log("Total frames in the page: ", await allFrames.length); //3
 
     // iterate all frames and print their name and src attribute
