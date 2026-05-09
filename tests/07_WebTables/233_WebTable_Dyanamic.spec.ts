@@ -17,8 +17,8 @@ test.describe('Web Table Tests', () => {
             const rowData = await rows.nth(i).locator('td').allInnerTexts();
             console.log(`Row ${i + 1}:`, rowData);
         }
-
-
-
+// allInnerTexts returns all text inside the element. if there are multiple element inside element then it will return all the text in form of array.
+// innerText returns the visible text of the element. if there are multiple element inside element then it will return all the text in form of string with space.
+// textContent returns the visible as well as hidden text content of the element. if there are multiple element inside element then it will return all the text in form of string with space.
     })
 });
