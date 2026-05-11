@@ -2,8 +2,8 @@ import { test, expect, Page } from '@playwright/test';
 import path from 'path';
 
 const BASE_URL ="https://app.thetestingacademy.com/playwright/tables/practice";
-const uploadFilePath= "tests/Projects/Project#5 - QA Profile Form/sample-upload.txt";
-const downloadFilePath="tests/Projects/Project#5 - QA Profile Form/Downloads/sample-download.txt";
+const uploadFilePath= "tests/Projects/Project_5 _QA_Profile_Form/sample-upload.txt";
+const downloadFilePath="tests/Projects/Project_5 _QA_Profile_Form/Downloads/sample-download.txt";
 
 interface personalInformation
 {
