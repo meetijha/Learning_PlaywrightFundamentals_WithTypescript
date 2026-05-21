@@ -1,0 +1,8 @@
+[
+  { "firstName": "Aarav",   "lastName": "Sharma",  "telephone": "9876543210", "password": "Pass@123",  "subscribeNewsletter": "Yes" },
+  { "firstName": "Priya",   "lastName": "Kapoor",  "telephone": "9988776655", "password": "Pwd!2026",  "subscribeNewsletter": "No"  },
+  { "firstName": "Rohan",   "lastName": "Mehta",   "telephone": "9123456789", "password": "Tta#Auto1", "subscribeNewsletter": "Yes" },
+  { "firstName": "Ananya",  "lastName": "Iyer",    "telephone": "9012345678", "password": "Sdet!2026", "subscribeNewsletter": "Yes" },
+  { "firstName": "Liam",    "lastName": "Walker",  "telephone": "7011223344", "password": "Auto!Test", "subscribeNewsletter": "No"  },
+  { "firstName": "Olivia",  "lastName": "Brown",   "telephone": "7799112233", "password": "Pwd@TTA1",  "subscribeNewsletter": "Yes" }
+]
