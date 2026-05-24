@@ -5,9 +5,10 @@ import { TTAcart } from '../pages/03_TTACart';
 import { TTACartCheckoutPageStepOne} from '../pages/04_TTACartCheckoutPage_Step_One';
 import { TTACartCheckoutPageStepTwo } from '../pages/05_TTACartCheckoutpage_Step_Two';
 import { TTACartCheckoutComplete } from '../pages/06_TTACartCheckoutComplete';
+import { TTACatOpenMenu } from '../pages/07_TTACartOpenMenu';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
-import { TTACatOpenMenu } from '../pages/07_TTACartOpenMenu';
+
 
 //dotenv.config();
 
